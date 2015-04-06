@@ -1,0 +1,13 @@
+C:\Snake3D\Snake3D\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Snake3D\Snake3D\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Snake3D\Snake3D\Temp\bin\Debug\UnityEditor.dll
+C:\Snake3D\Snake3D\Temp\bin\Debug\UnityEngine.dll
+C:\Snake3D\Snake3D\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Snake3D\Snake3D\Temp\bin\Debug\Mono.Cecil.dll
+C:\Snake3D\Snake3D\Temp\bin\Debug\Unity.SerializationLogic.dll
+C:\Snake3D\Snake3D\Temp\bin\Debug\Unity.DataContract.dll
+C:\Snake3D\Snake3D\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Snake3D\Snake3D\Temp\bin\Debug\Unity.CecilTools.dll
+C:\Snake3D\Snake3D\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
+C:\Snake3D\Snake3D\obj\Debug\Assembly-CSharp.dll
+C:\Snake3D\Snake3D\obj\Debug\Assembly-CSharp.pdb

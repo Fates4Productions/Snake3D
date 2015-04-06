@@ -1,0 +1,22 @@
+Initialize engine version: 5.0.0f4 (5b98b70ebeb9)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon HD 6520G (ID=0x9647)
+    Vendor:   ATI
+    VRAM:     502 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Snake3D\Snake3D\Snake3D_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Snake3D\Snake3D\Snake3D_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Snake3D\Snake3D\Snake3D_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Snake3D\Snake3D\Snake3D_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Snake3D\Snake3D\Snake3D_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Snake3D\Snake3D\Snake3D_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.121 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Snake3D\Snake3D\Snake3D_Data\Managed\System.Core.dll (this message is harmless)
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 75bc -> priority: 1 
