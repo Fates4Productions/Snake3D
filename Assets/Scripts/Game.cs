@@ -4,19 +4,19 @@ using System.Collections.Generic;
 
 public class Game : MonoBehaviour {
 
-    public Transform head1;
-    public Transform body1;
-    public Transform head2;
-    public Transform body2;
-    public Transform food;
+    public GameObject head1;
+    public GameObject body1;
+    public GameObject head2;
+    public GameObject body2;
+    public GameObject food;
+    public MyInputController myInputController;
 
     Snake snake1;
     Snake snake2;
 
-    List<Transform> snake1Objects = new List<Transform>();
-    List<Transform> snake2Objects = new List<Transform>();
-    List<IntVec3> foodPositions = new List<IntVec3>();
-    List<Transform> foodObjects = new List<Transform>();
+    List<GameObject> snake1Objects = new List<GameObject>();
+    List<GameObject> snake2Objects = new List<GameObject>();
+    List<Food> foods = new List<Food>();
 
 	long frameNumber = 0;
 	long lastUpdateFrame = 0;
@@ -24,8 +24,8 @@ public class Game : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        initSnake1(new IntVec3(20, 0, 0), new IntVec3(-1, 0, 0));
-        initSnake2(new IntVec3(-20, 0, 0), new IntVec3(1, 0, 0));
+        initSnake1(new IntVec3(7, 0, 0), new IntVec3(-1, 0, 0));
+        initSnake2(new IntVec3(-7, 0, 0), new IntVec3(1, 0, 0));
 
         //some random food locations
         addFood(new IntVec3(5, 0, 0));
@@ -41,6 +41,10 @@ public class Game : MonoBehaviour {
             //update lastUpdateFrame
             lastUpdateFrame = frameNumber;
 			
+            //update snake directions
+            snake1.setDirection(myInputController.getDirection1());
+            snake2.setDirection(myInputController.getDirection2());
+
 
             //do a snake update
 			snake1.update();
@@ -51,6 +55,8 @@ public class Game : MonoBehaviour {
             if (snake1.checkTailEaten(snake2))
             {
                 //snake1 eat tail of snake2
+                removeBody2();
+                addBody1();
             }
             else if (snake1.checkCollision(snake2))
             {
@@ -59,6 +65,8 @@ public class Game : MonoBehaviour {
             if (snake2.checkTailEaten(snake1))
             {
                 //snake2 eat tail of snake1
+                removeBody1();
+                addBody2();
             }
             else if (snake2.checkCollision(snake1))
             {
@@ -69,18 +77,18 @@ public class Game : MonoBehaviour {
 
             //check snake, food collisions
             //snake1 gets slight advantage ahaha
-            foreach (IntVec3 food in foodPositions)
+            foreach (Food food in foods)
             {
-                if (snake1.checkCollision(food))
+                if (snake1.checkCollision(food.position))
                 {
                     addBody1();
                     removeFood(food);
                     break;
                 }
             }
-            foreach (IntVec3 food in foodPositions)
+            foreach (Food food in foods)
             {
-                if (snake2.checkCollision(food))
+                if (snake2.checkCollision(food.position))
                 {
                     addBody2();
                     removeFood(food);
@@ -92,11 +100,11 @@ public class Game : MonoBehaviour {
             //update snake object positions
             for (int i = 0; i < snake1.nodes.Count; i++)
             {
-                snake1Objects[i].position = new Vector3(snake1.nodes[i].position.x, snake1.nodes[i].position.y, snake1.nodes[i].position.z);
+                snake1Objects[i].transform.position = new Vector3(snake1.nodes[i].position.x, snake1.nodes[i].position.y, snake1.nodes[i].position.z);
             }
             for (int i = 0; i < snake2.nodes.Count; i++)
             {
-                snake2Objects[i].position = new Vector3(snake2.nodes[i].position.x, snake2.nodes[i].position.y, snake2.nodes[i].position.z);
+                snake2Objects[i].transform.position = new Vector3(snake2.nodes[i].position.x, snake2.nodes[i].position.y, snake2.nodes[i].position.z);
             }
 		}
 	}
@@ -104,39 +112,50 @@ public class Game : MonoBehaviour {
 
     void initSnake1(IntVec3 position, IntVec3 direction)
     {
-        snake1Objects.Add((Transform)Instantiate(head1, new Vector3(100, 100, 100), Quaternion.identity));
+        snake1Objects.Add((GameObject)Instantiate(head1, new Vector3(100, 100, 100), Quaternion.identity));
         snake1 = new Snake(position, direction);
     }
     void initSnake2(IntVec3 position, IntVec3 direction)
     {
-        snake2Objects.Add((Transform)Instantiate(head2, new Vector3(100, 100, 100), Quaternion.identity));
+        snake2Objects.Add((GameObject)Instantiate(head2, new Vector3(100, 100, 100), Quaternion.identity));
         snake2 = new Snake(position, direction);
     }
     void addBody1()
     {
-        snake1Objects.Add((Transform)Instantiate(body1, new Vector3(100, 100, 100), Quaternion.identity));
+        snake1Objects.Add((GameObject)Instantiate(body1, new Vector3(100, 100, 100), Quaternion.identity));
         snake1.addBody();
     }
     void addBody2()
     {
-        snake2Objects.Add((Transform)Instantiate(body2, new Vector3(100, 100, 100), Quaternion.identity));
+        snake2Objects.Add((GameObject)Instantiate(body2, new Vector3(100, 100, 100), Quaternion.identity));
         snake2.addBody();
+    }
+    void removeBody1()
+    {
+        snake1.removeBody();
+        GameObject snakeEndObject = snake1Objects[snake1Objects.Count-1];
+        snake1Objects.Remove(snakeEndObject);
+        Object.Destroy(snakeEndObject);
+    }
+    void removeBody2()
+    {
+        snake2.removeBody();
+        GameObject snakeEndObject = snake2Objects[snake2Objects.Count-1];
+        snake2Objects.Remove(snakeEndObject);
+        Object.Destroy(snakeEndObject);
     }
 
     //food
     void addFood(IntVec3 position)
     {
         Vector3 location = new Vector3(position.x, position.y, position.z);
-        foodObjects.Add((Transform)Instantiate(food, location, Quaternion.identity));
-        foodPositions.Add(position);
+        foods.Add(new Food(position, (GameObject)Instantiate(food, location, Quaternion.identity)));
     }
-    void removeFood(IntVec3 food)
+    void removeFood(Food food)
     {
-        //foodObjects.Remove
-        foodPositions.Remove(food);
+        //delete object from world
+        //food.transform
+        Object.Destroy(food.gameObject);
+        foods.Remove(food);
     }
-
-    //********implement setDirection methods**********
-    //ex:   snake2.setDirection(new IntVec3(0, 1, 0));
-    //      snake1.setDirection(new IntVec3(0, -1, 0));
 }

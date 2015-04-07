@@ -7,7 +7,7 @@ public class MyInputController : MonoBehaviour
     float positionX2, positionY2, positionZ2;
     float xCenter1, yCenter1, zCenter1;
     float xCenter2, yCenter2, zCenter2;
-    int dir1, dir2;
+    IntVec3 dir1, dir2;
 
     void Start()
     {
@@ -24,8 +24,8 @@ public class MyInputController : MonoBehaviour
         xCenter2 = 0;
         yCenter2 = 0;
         zCenter2 = 0;
-        dir1 = 0;
-        dir2 = 1;
+        dir1 = new IntVec3(1, 0, 0);
+        dir2 = new IntVec3(-1, 0, 0);
     }
 
     // Update is called once per frame
@@ -73,17 +73,17 @@ public class MyInputController : MonoBehaviour
             positionZ1 = (SixenseInput.Controllers[0].Position[2] - zCenter1);
 
             if (positionX1 > 120 && positionX1 > Mathf.Abs(positionY1) && positionX1 > Mathf.Abs(positionZ1))
-                dir1 = 0;
+                dir1 = new IntVec3(1, 0, 0);
             else if (positionX1 < -120 && Mathf.Abs(positionX1) > Mathf.Abs(positionY1) && Mathf.Abs(positionX1) > Mathf.Abs(positionZ1))
-                dir1 = 1;
+                dir1 = new IntVec3(-1, 0, 0);
             else if (positionY1 > 120 && positionY1 > Mathf.Abs(positionX1) && positionY1 > Mathf.Abs(positionZ1))
-                dir1 = 2;
+                dir1 = new IntVec3(0, 1, 0);
             else if (positionY1 < -120 && Mathf.Abs(positionY1) > Mathf.Abs(positionX1) && Mathf.Abs(positionY1) > Mathf.Abs(positionZ1))
-                dir1 = 3;
+                dir1 = new IntVec3(0, -1, 0);
             else if (positionZ1 > 120 && positionZ1 > Mathf.Abs(positionX1) && positionZ1 > Mathf.Abs(positionY1))
-                dir1 = 4;
+                dir1 = new IntVec3(0, 0, 1);
             else if (positionZ1 < -120 && Mathf.Abs(positionZ1) > Mathf.Abs(positionX1) && Mathf.Abs(positionZ1) > Mathf.Abs(positionY1))
-                dir1 = 5;
+                dir1 = new IntVec3(0, 0, -1);
 
             Debug.Log(dir1);
     	}
@@ -95,27 +95,27 @@ public class MyInputController : MonoBehaviour
             positionZ2 = (SixenseInput.Controllers[1].Position[2] - zCenter2);
 
             if (positionX2 > 120 && positionX2 > Mathf.Abs(positionY2) && positionX2 > Mathf.Abs(positionZ2))
-                dir2 = 0;
+                dir2 = new IntVec3(1, 0, 0);
             else if (positionX2 < -120 && Mathf.Abs(positionX2) > Mathf.Abs(positionY2) && Mathf.Abs(positionX2) > Mathf.Abs(positionZ2))
-                dir2 = 1;
+                dir2 = new IntVec3(-1, 0, 0);
             else if (positionY2 > 120 && positionY2 > Mathf.Abs(positionX2) && positionY2 > Mathf.Abs(positionZ2))
-                dir2 = 2;
+                dir2 = new IntVec3(0, 1, 0);
             else if (positionY2 < -120 && Mathf.Abs(positionY2) > Mathf.Abs(positionX2) && Mathf.Abs(positionY2) > Mathf.Abs(positionZ2))
-                dir2 = 3;
+                dir2 = new IntVec3(0, -1, 0);
             else if (positionZ2 > 120 && positionZ2 > Mathf.Abs(positionX2) && positionZ2 > Mathf.Abs(positionY2))
-                dir2 = 4;
+                dir2 = new IntVec3(0, 0, 1);
             else if (positionZ2 < -120 && Mathf.Abs(positionZ2) > Mathf.Abs(positionX2) && Mathf.Abs(positionZ2) > Mathf.Abs(positionY2))
-                dir2 = 5;
+                dir2 = new IntVec3(0, 0, -1);
             Debug.Log(dir2);
         }
     }
 
-    int getDirection1()
+    public IntVec3 getDirection1()
     {
         return dir1;
     }
 
-    int getDirection2()
+    public IntVec3 getDirection2()
     {
         return dir2;
     }

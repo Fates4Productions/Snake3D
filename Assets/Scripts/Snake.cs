@@ -51,6 +51,14 @@ public class Snake
         newBodyPosition = nodes[nodes.Count - 1].position;
     }
 
+    public void removeBody()
+    {
+        if (nodes.Count > 1)
+        {
+            nodes.Remove(nodes[nodes.Count - 1]);
+        }
+    }
+
     public void setDirection(IntVec3 direction)
     {
         ((SnakeHead)nodes[0]).direction = direction;
