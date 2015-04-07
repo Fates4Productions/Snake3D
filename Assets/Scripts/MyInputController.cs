@@ -85,7 +85,7 @@ public class MyInputController : MonoBehaviour
             else if (positionZ1 < -120 && Mathf.Abs(positionZ1) > Mathf.Abs(positionX1) && Mathf.Abs(positionZ1) > Mathf.Abs(positionY1))
                 dir1 = new IntVec3(0, 0, -1);
 
-            Debug.Log(dir1);
+            //Debug.Log(dir1);
     	}
 
         if (SixenseInput.Controllers[1].Enabled)
@@ -106,7 +106,7 @@ public class MyInputController : MonoBehaviour
                 dir2 = new IntVec3(0, 0, 1);
             else if (positionZ2 < -120 && Mathf.Abs(positionZ2) > Mathf.Abs(positionX2) && Mathf.Abs(positionZ2) > Mathf.Abs(positionY2))
                 dir2 = new IntVec3(0, 0, -1);
-            Debug.Log(dir2);
+            //Debug.Log(dir2);
         }
     }
 

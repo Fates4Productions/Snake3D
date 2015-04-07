@@ -10,6 +10,9 @@ public class Game : MonoBehaviour {
     public GameObject body2;
     public GameObject food;
     public MyInputController myInputController;
+    public int boxSize = 14;
+    public int player1Start = 7;
+    public int player2Start = -7;
 
     Snake snake1;
     Snake snake2;
@@ -20,24 +23,46 @@ public class Game : MonoBehaviour {
 
 	long frameNumber = 0;
 	long lastUpdateFrame = 0;
-	long framesPerUpdate = 10;
+	long framesPerUpdate = 50;
+
+    bool gameOver = false;
 
 	// Use this for initialization
 	void Start () {
-        initSnake1(new IntVec3(7, 0, 0), new IntVec3(-1, 0, 0));
-        initSnake2(new IntVec3(-7, 0, 0), new IntVec3(1, 0, 0));
+        initSnake1(new IntVec3(player1Start, 0, 0), new IntVec3(-1, 0, 0));
+        initSnake2(new IntVec3(player2Start, 0, 0), new IntVec3(1, 0, 0));
 
         //some random food locations
         addFood(new IntVec3(5, 0, 0));
         addFood(new IntVec3(0, 3, 0));
         addFood(new IntVec3(0, -7, 0));
         addFood(new IntVec3(-1, 0, 0));
+
+        addFood(new IntVec3(10, 4, 5));
+        addFood(new IntVec3(0, -8, 5));
+        addFood(new IntVec3(-7, 2, 5));
+        addFood(new IntVec3(3, 0, 5));
+
+        addFood(new IntVec3(8, 13, 10));
+        addFood(new IntVec3(-2, 5, 10));
+        addFood(new IntVec3(1, -8, 10));
+        addFood(new IntVec3(-12, -3, 10));
+
+        addFood(new IntVec3(14, 9, -5));
+        addFood(new IntVec3(0, -11, -5));
+        addFood(new IntVec3(-9, -8, -5));
+        addFood(new IntVec3(7, -3, -5));
+
+        addFood(new IntVec3(2, 5, -10));
+        addFood(new IntVec3(-6, 7, -10));
+        addFood(new IntVec3(12, -4, -10));
+        addFood(new IntVec3(-9, 12, -10));
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		frameNumber++;
-		if ((frameNumber - lastUpdateFrame) >= framesPerUpdate) {
+		if ((frameNumber - lastUpdateFrame) >= framesPerUpdate && !gameOver) {
             //update lastUpdateFrame
             lastUpdateFrame = frameNumber;
 			
@@ -61,6 +86,7 @@ public class Game : MonoBehaviour {
             else if (snake1.checkCollision(snake2))
             {
                 //death of snake1
+                GAMEOVER(2);
             }
             if (snake2.checkTailEaten(snake1))
             {
@@ -71,6 +97,27 @@ public class Game : MonoBehaviour {
             else if (snake2.checkCollision(snake1))
             {
                 //death of snake2
+                GAMEOVER(1);
+            }
+            if (snake1.checkCollision(new IntVec3(-1*boxSize, -1*boxSize, -1*boxSize), new IntVec3(boxSize, boxSize, boxSize)))
+            {
+                //death of snake1
+                GAMEOVER(2);
+            }
+            if (snake2.checkCollision(new IntVec3(-1*boxSize, -1*boxSize, -1*boxSize), new IntVec3(boxSize, boxSize, boxSize)))
+            {
+                //death of snake2
+                GAMEOVER(1);
+            }
+            if (snake1.checkCollision())
+            {
+                //death of snake1
+                GAMEOVER(2);
+            }
+            if (snake2.checkCollision())
+            {
+                //death of snake2
+                GAMEOVER(1);
             }
 
 
@@ -106,6 +153,9 @@ public class Game : MonoBehaviour {
             {
                 snake2Objects[i].transform.position = new Vector3(snake2.nodes[i].position.x, snake2.nodes[i].position.y, snake2.nodes[i].position.z);
             }
+            //update snake orientation
+            snake1Objects[0].transform.localEulerAngles = snake1.getLocalEulerOrientation();
+            snake2Objects[0].transform.localEulerAngles = snake2.getLocalEulerOrientation();
 		}
 	}
 
@@ -157,5 +207,22 @@ public class Game : MonoBehaviour {
         //food.transform
         Object.Destroy(food.gameObject);
         foods.Remove(food);
+    }
+
+    void GAMEOVER(int winner)
+    {
+        switch(winner)
+        {
+            case 1:
+                //player 1 wins
+                Debug.Log("PLAYER 1 WINS");
+                gameOver = true;
+                break;
+            case 2:
+                //player 2 wins
+                Debug.Log("PLAYER 2 WINS");
+                gameOver = true;
+                break;
+        }
     }
 }
