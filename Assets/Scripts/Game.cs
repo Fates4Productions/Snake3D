@@ -9,10 +9,10 @@ public class Game : MonoBehaviour {
     public GameObject head2;
     public GameObject body2;
     public GameObject food;
-    public MyInputController myInputController;
+    public MyRotationInputController myInputController;
     public int boxSize = 14;
-    public int player1Start = 7;
-    public int player2Start = -7;
+    public int player1Start = -7;
+    public int player2Start = 7;
 	public AudioClip audioClip;
 
     Snake snake1;
@@ -24,7 +24,7 @@ public class Game : MonoBehaviour {
 
 	long frameNumber = 0;
 	long lastUpdateFrame = 0;
-	long framesPerUpdate = 50;
+	long framesPerUpdate = 20;
 
     bool gameOver = false;
 

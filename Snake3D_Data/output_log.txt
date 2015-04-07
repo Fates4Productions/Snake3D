@@ -2,40 +2,39 @@ Initialize engine version: 5.0.0f4 (5b98b70ebeb9)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: AMD Radeon R9 200 Series (ID=0x6810)
+    Renderer: AMD Radeon HD 6520G (ID=0x9647)
     Vendor:   ATI
-    VRAM:     2027 MB
+    VRAM:     502 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Snake3D\Snake3D_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Snake3D\Snake3D_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Snake3D\Snake3D_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Snake3D\Snake3D_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Snake3D\Snake3D_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Snake3D\Snake3D_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.045 seconds
-desktop: 1920x1080 60Hz; virtual: 5760x1080 at -1920,0
+Platform assembly: C:\Snake3D\Snake3D\Snake3D_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Snake3D\Snake3D\Snake3D_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Snake3D\Snake3D\Snake3D_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Snake3D\Snake3D\Snake3D_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Snake3D\Snake3D\Snake3D_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Snake3D\Snake3D\Snake3D_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.112 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-Platform assembly: C:\Snake3D\Snake3D_Data\Managed\System.Core.dll (this message is harmless)
-Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2f10 -> priority: 1 
-  Thread -> id: 3394 -> priority: 1 
+Platform assembly: C:\Snake3D\Snake3D\Snake3D_Data\Managed\System.Core.dll (this message is harmless)
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: d730 -> priority: 1 
 Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.457175 ms
+UnloadTime: 0.635292 ms
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 263.
-Total: 0.150946 ms (FindLiveObjects: 0.014313 ms CreateObjectMapping: 0.008675 ms MarkObjects: 0.120583 ms  DeleteObjects: 0.006506 ms)
+Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 266.
+Total: 0.412537 ms (FindLiveObjects: 0.079869 ms CreateObjectMapping: 0.029309 ms MarkObjects: 0.284306 ms  DeleteObjects: 0.016120 ms)
 
 Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.626339 ms
+UnloadTime: 1.026579 ms
 
-Unloading 58 unused Assets to reduce memory usage. Loaded Objects now: 176.
-Total: 0.205599 ms (FindLiveObjects: 0.018217 ms CreateObjectMapping: 0.010410 ms MarkObjects: 0.112775 ms  DeleteObjects: 0.063327 ms)
+Unloading 58 unused Assets to reduce memory usage. Loaded Objects now: 177.
+Total: 0.567146 ms (FindLiveObjects: 0.087196 ms CreateObjectMapping: 0.030042 ms MarkObjects: 0.266720 ms  DeleteObjects: 0.180255 ms)
 
 Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.284975 ms
+UnloadTime: 0.567879 ms
 
-Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 176.
-Total: 0.310567 ms (FindLiveObjects: 0.022555 ms CreateObjectMapping: 0.021904 ms MarkObjects: 0.242901 ms  DeleteObjects: 0.021037 ms)
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 177.
+Total: 0.255728 ms (FindLiveObjects: 0.019784 ms CreateObjectMapping: 0.022715 ms MarkObjects: 0.199307 ms  DeleteObjects: 0.012456 ms)
 
