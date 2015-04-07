@@ -13,6 +13,7 @@ public class Game : MonoBehaviour {
     public int boxSize = 14;
     public int player1Start = 7;
     public int player2Start = -7;
+	public AudioClip audioClip;
 
     Snake snake1;
     Snake snake2;
@@ -127,18 +128,20 @@ public class Game : MonoBehaviour {
             foreach (Food food in foods)
             {
                 if (snake1.checkCollision(food.position))
-                {
-                    addBody1();
-                    removeFood(food);
-                    break;
+				{
+					snake1Objects[0].GetComponent<AudioSource>().Play();
+					addBody1();
+					removeFood(food);
+					break;
                 }
             }
             foreach (Food food in foods)
             {
                 if (snake2.checkCollision(food.position))
                 {
-                    addBody2();
-                    removeFood(food);
+					snake2Objects[0].GetComponent<AudioSource>().Play();
+					addBody2();
+					removeFood(food);
                     break;
                 }
             }
@@ -163,11 +166,13 @@ public class Game : MonoBehaviour {
     void initSnake1(IntVec3 position, IntVec3 direction)
     {
         snake1Objects.Add((GameObject)Instantiate(head1, new Vector3(100, 100, 100), Quaternion.identity));
+		snake1Objects[0].GetComponent<AudioSource>().clip = audioClip;
         snake1 = new Snake(position, direction);
     }
     void initSnake2(IntVec3 position, IntVec3 direction)
     {
         snake2Objects.Add((GameObject)Instantiate(head2, new Vector3(100, 100, 100), Quaternion.identity));
+		snake2Objects[0].GetComponent<AudioSource>().clip = audioClip;
         snake2 = new Snake(position, direction);
     }
     void addBody1()
@@ -215,14 +220,14 @@ public class Game : MonoBehaviour {
         {
             case 1:
                 //player 1 wins
-                Debug.Log("PLAYER 1 WINS");
+				Application.LoadLevel(2);
                 gameOver = true;
                 break;
             case 2:
                 //player 2 wins
-                Debug.Log("PLAYER 2 WINS");
+				Application.LoadLevel(3);
                 gameOver = true;
-                break;
+	            break;
         }
     }
 }

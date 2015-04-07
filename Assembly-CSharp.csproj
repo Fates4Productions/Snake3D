@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Snake.cs" />
      <Compile Include="Assets\Scripts\SnakeHead.cs" />
      <Compile Include="Assets\Scripts\SnakeNode.cs" />
+     <Compile Include="Assets\Scripts\WinScript.cs" />
      <Compile Include="Assets\SixenseInput\DemoScenes\Scripts\SixenseHand.cs" />
      <Compile Include="Assets\SixenseInput\DemoScenes\Scripts\SixenseHandsController.cs" />
      <Compile Include="Assets\SixenseInput\DemoScenes\Scripts\SixenseInputTest.cs" />
