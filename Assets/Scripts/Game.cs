@@ -21,10 +21,12 @@ public class Game : MonoBehaviour {
     List<GameObject> snake1Objects = new List<GameObject>();
     List<GameObject> snake2Objects = new List<GameObject>();
     List<Food> foods = new List<Food>();
+    int foodRemoved = 0;
 
 	long frameNumber = 0;
-	long lastUpdateFrame = 0;
-	long framesPerUpdate = 20;
+	//long framesPerUpdate = 20;
+    long framesPerUpdate = 30;
+    long lastUpdateFrame = -30;
 
     bool gameOver = false;
 
@@ -34,30 +36,14 @@ public class Game : MonoBehaviour {
         initSnake2(new IntVec3(player2Start, 0, 0), new IntVec3(1, 0, 0));
 
         //some random food locations
-        addFood(new IntVec3(5, 0, 0));
-        addFood(new IntVec3(0, 3, 0));
-        addFood(new IntVec3(0, -7, 0));
-        addFood(new IntVec3(-1, 0, 0));
-
-        addFood(new IntVec3(10, 4, 5));
-        addFood(new IntVec3(0, -8, 5));
-        addFood(new IntVec3(-7, 2, 5));
-        addFood(new IntVec3(3, 0, 5));
-
-        addFood(new IntVec3(8, 13, 10));
-        addFood(new IntVec3(-2, 5, 10));
-        addFood(new IntVec3(1, -8, 10));
-        addFood(new IntVec3(-12, -3, 10));
-
-        addFood(new IntVec3(14, 9, -5));
-        addFood(new IntVec3(0, -11, -5));
-        addFood(new IntVec3(-9, -8, -5));
-        addFood(new IntVec3(7, -3, -5));
-
-        addFood(new IntVec3(2, 5, -10));
-        addFood(new IntVec3(-6, 7, -10));
-        addFood(new IntVec3(12, -4, -10));
-        addFood(new IntVec3(-9, 12, -10));
+        int count = 0;
+        while(count < 8)
+        {
+            if(addRandom())
+            {
+                count++;
+            }
+        }
 	}
 	
 	// Update is called once per frame
@@ -212,6 +198,107 @@ public class Game : MonoBehaviour {
         //food.transform
         Object.Destroy(food.gameObject);
         foods.Remove(food);
+        foodRemoved++;
+        if(foodRemoved > 3)
+        {
+            if(addRandom())
+            {
+                foodRemoved = 0;
+            }
+        }
+    }
+
+    //spawn food
+    void addL(IntVec3 pos, IntVec3 orientation)//single value of -1 or +1
+    {
+        addFood(pos);
+        addFood(pos + new IntVec3(orientation.x, orientation.y, orientation.z));
+        addFood(pos + new IntVec3(orientation.x * 2, orientation.y * 2, orientation.z * 2));
+        addFood(pos + new IntVec3(orientation.y, orientation.z, orientation.x));
+    }
+
+    void addJ(IntVec3 pos, IntVec3 orientation)
+    {
+        addFood(pos);
+        addFood(pos + new IntVec3(orientation.x, orientation.y, orientation.z));
+        addFood(pos + new IntVec3(orientation.x * 2, orientation.y * 2, orientation.z * 2));
+        addFood(pos + new IntVec3(-1 * orientation.y, -1 * orientation.z, -1 * orientation.x));
+    }
+
+    void addO(IntVec3 pos, IntVec3 orientation)
+    {
+        addFood(pos);
+        addFood(pos + new IntVec3(orientation.y, orientation.z, orientation.x));
+        addFood(pos + new IntVec3(orientation.z, orientation.x, orientation.y));
+        addFood(pos + new IntVec3(orientation.z + orientation.y, orientation.z + orientation.x, orientation.y + orientation.x));
+    }
+
+    void addI(IntVec3 pos, IntVec3 orientation)
+    {
+        addFood(pos);
+        addFood(pos + new IntVec3(orientation.x, orientation.y, orientation.z));
+        addFood(pos + new IntVec3(orientation.x * 2, orientation.y * 2, orientation.z * 2));
+        addFood(pos + new IntVec3(orientation.x * -1, orientation.y * -1, orientation.z * -1));
+    }
+
+    void addS(IntVec3 pos, IntVec3 orientation)
+    {
+        addFood(pos);
+        addFood(pos + new IntVec3(-1 * orientation.x, -1 * orientation.y, -1 * orientation.z));
+        addFood(pos + new IntVec3(orientation.z, orientation.x, orientation.y));
+        addFood(pos + new IntVec3(orientation.x + orientation.z, orientation.x + orientation.y, orientation.y + orientation.z));
+    }
+
+    IntVec3 randomOrientation()
+    {
+        switch (Random.Range(0, 2))
+        {
+            case 0:
+                return new IntVec3(1, 0, 0);
+            case 1:
+                return new IntVec3(0, 1, 0);
+            default:
+                return new IntVec3(0, 0, 1);
+        }
+    }
+
+    bool addRandom()
+    {
+        //[pos - 2, pos + 2]
+        IntVec3 pos = new IntVec3((int)Random.Range(-12, 12), (int)Random.Range(-12, 12), (int)Random.Range(-12, 12));
+        bool conflict = false;
+        foreach(Food food in foods)
+        {
+            if (pos.x - 3 < food.position.x && pos.x + 3 > food.position.x &&
+                pos.y - 3 < food.position.y && pos.y + 3 > food.position.y &&
+                pos.z - 3 < food.position.z && pos.z + 3 > food.position.z)
+            {
+                conflict = true;
+                break;
+            }
+        }
+        if(!conflict)
+        {
+            switch (Random.Range(0, 4))
+            {
+                case 0:
+                    addL(pos, randomOrientation());
+                    break;
+                case 1:
+                    addJ(pos, randomOrientation());
+                    break;
+                case 2:
+                    addO(pos, randomOrientation());
+                    break;
+                case 3:
+                    addI(pos, randomOrientation());
+                    break;
+                case 4:
+                    addS(pos, randomOrientation());
+                    break;
+            }
+        }
+        return !conflict;
     }
 
     void GAMEOVER(int winner)

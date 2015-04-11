@@ -19,16 +19,72 @@ public class MyRotationInputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (SixenseInput.Controllers[0].Enabled)
+        if (SixenseInput.Controllers[0].Enabled)
         {
             dir1 = getDirection(SixenseInput.Controllers[0].Rotation);
             //Debug.Log(dir1);
-    	}
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                dir1 = new IntVec3(-1, 0, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                dir1 = new IntVec3(1, 0, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                dir1 = new IntVec3(0, 0, 1);
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                dir1 = new IntVec3(0, 0, -1);
+            }
+            if (Input.GetKeyDown(KeyCode.PageUp))
+            {
+                dir1 = new IntVec3(0, 1, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.PageDown))
+            {
+                dir1 = new IntVec3(0, -1, 0);
+            }
+        }
+
+
 
         if (SixenseInput.Controllers[1].Enabled)
         {
             dir2 = getDirection(SixenseInput.Controllers[1].Rotation);
             //Debug.Log(dir2);
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                dir2 = new IntVec3(-1, 0, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                dir2 = new IntVec3(1, 0, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                dir2 = new IntVec3(0, 0, 1);
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                dir2 = new IntVec3(0, 0, -1);
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                dir2 = new IntVec3(0, 1, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                dir2 = new IntVec3(0, -1, 0);
+            }
         }
     }
 
